@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Answer;
 use app\models\Theme;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -65,13 +66,18 @@ class ThemeController extends Controller
      */
     public function actionView($id)
     {
-        $model = Theme::findOne($id);
-        if ($model === null) {
-            throw new NotFoundHttpException;
-        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => Answer::find()->where(['id_theme' => $id])
+                ->orderBy('date DESC')
+        ]);
+//        $model = Theme::findOne($id);
+//        if ($model === null) {
+//            throw new NotFoundHttpException;
+//        }
 
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider
         ]);
     }
 
