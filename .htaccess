@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule (.+)? /yii/web/$1
