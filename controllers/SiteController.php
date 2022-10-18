@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Answer;
 use app\models\Theme;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -62,7 +64,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Theme::find(),
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
