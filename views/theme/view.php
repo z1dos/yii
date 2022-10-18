@@ -75,5 +75,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'date', 'format' => ['date', 'd-MM-Y H:i:s']]
         ],
     ]) ;?>
+
+    <div class="answer-form">
+
+        <?php $form = \yii\widgets\ActiveForm::begin(['action' => '/answer/create']);
+        $answer = new \app\models\Answer();
+        ?>
+
+        <?= $form->field($answer, 'text')->textarea(['rows' => 6]) ?>
+
+        <?= $form->field($answer, 'id_theme')->hiddenInput(['value' => $model->id])->label(false) ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php \yii\widgets\ActiveForm::end(); ?>
+
+    </div>
+
 </div>
 

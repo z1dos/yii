@@ -32,12 +32,12 @@ class Answer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'safe'],
-            [['text', 'id_user', 'id_theme'], 'required'],
+            [['text', 'id_theme'], 'required'],
             [['text'], 'string'],
-            [['id_user', 'id_theme'], 'integer'],
-            [['id_theme'], 'exist', 'skipOnError' => true, 'targetClass' => Theme::class, 'targetAttribute' => ['id_theme' => 'id']],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id']],
+            [['id_theme'], 'integer'],
+            [['id_user'], 'default', 'value' => Yii::$app->user->getId()],
+            [['id_theme'], 'exist', 'skipOnError' => true,
+                'targetClass' => Theme::className(), 'targetAttribute' => ['id_theme' => 'id']],
         ];
     }
 
