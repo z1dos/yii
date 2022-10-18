@@ -83,8 +83,6 @@ class AnswerController extends Controller
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['them/view', 'id' => $model->id_theme]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
