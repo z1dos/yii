@@ -19,7 +19,7 @@ $this->title = 'Главная страница'; ?>
                 'attribute' => 'name',
                 'format' => 'html',
                 'value' => function ($data) {
-                    return Html::a($data->name, '/theme/view/?id' . $data->id);
+                    return Html::a($data->name, '/yii/web/theme/view?id=' . $data->id);
                 }],
             'text:ntext',
             ['attribute' => 'Ответы', 'value' => function ($data) {
