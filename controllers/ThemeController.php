@@ -65,8 +65,13 @@ class ThemeController extends Controller
      */
     public function actionView($id)
     {
+        $model = Theme::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
