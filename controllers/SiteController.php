@@ -65,7 +65,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Theme::find(),
+            'query' => Theme::find()->where(['status' => 2]),
             /*
             'pagination' => [
                 'pageSize' => 50
