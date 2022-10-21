@@ -22,22 +22,32 @@ class ThemeController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl:: className(),
-                'only' => ['index', 'create'],
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'admin'],
                 'rules' => [
                     [
+                        'actions' => ['admin'],
                         'allow' => true,
-                        'actions' => ['index', 'create'],
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return \Yii::$app->user->identity->isAdmin();
+                        }
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($role, $action) {
+                            return !\Yii::$app->user->isGuest;
+                        }
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ]
-            ]
         ];
     }
 
@@ -151,5 +161,17 @@ class ThemeController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionAdmin()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Theme::find()
+                ->orderBy('status ASC')
+        ]);
+
+        return $this->render('admin', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
