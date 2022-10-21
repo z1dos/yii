@@ -10,7 +10,7 @@ $this->title = 'Главная страница'; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
+    <h2>Одобренные заявки</h2>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

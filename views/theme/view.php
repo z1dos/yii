@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             'user.name',
-            'text.ntext',
+            'text',
             ['attribute' => 'date', 'format' => ['date', 'd-MM-Y H:i:s']]
         ],
     ]) ;?>
