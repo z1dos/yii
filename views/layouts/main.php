@@ -40,7 +40,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Зарегестрироваться', 'url' => ['/user/create'], 'visible' => Yii::$app->user->isGuest],
             ['label' => 'Личный кабинет', 'url' => ['/theme/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Модерирование тем', 'url' => ['theme/admin'],
