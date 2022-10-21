@@ -83,4 +83,16 @@ class Theme extends \yii\db\ActiveRecord
             case 3: return 'Отклонена';
         }
     }
+
+    public function approve()
+    {
+        $this->status = 2;
+        $this->save();
+    }
+
+    public function reject()
+    {
+        $this->status = 3;
+        $this->save();
+    }
 }

@@ -27,6 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
             }],
             ['attribute' => 'date', 'format' => ['date', 'd-MM-Y H:i:s']],
 
+            [
+                'attribute' => 'Адмнистратирование',
+                'format' => 'html',
+                'value' => function ($data) {
+                    switch ($data->status) {
+                        case 1:
+                            return Html::a('Одобрить', 'approve/?id=' . $data->id) . " | " .
+                                Html::a('Отклонить', 'reject/?id=' . $data->id);
+                        case 2:
+                            Html::a('Отклонить', 'reject/?id=' . $data->id);
+                        case 3:
+                            Html::a('Одобрить', 'approve/?id=' . $data->id);
+                    }
+                }
+            ],
+            
             ['class' => 'yii\grid\ActionColumn']
         ],
     ]); ?>

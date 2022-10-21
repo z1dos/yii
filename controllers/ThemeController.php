@@ -26,7 +26,7 @@ class ThemeController extends Controller
                 'only' => ['index', 'create', 'admin'],
                 'rules' => [
                     [
-                        'actions' => ['admin'],
+                        'actions' => ['admin', 'approve', 'reject'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -173,5 +173,17 @@ class ThemeController extends Controller
         return $this->render('admin', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionApprove($id)
+    {
+        $this->findModel($id)->approve();
+        return $this->redirect(['admin']);
+    }
+
+    public function actionReject($id)
+    {
+        $this->findModel($id)->reject();
+        return $this->redirect(['admin']);
     }
 }
